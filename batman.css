@@ -1,60 +1,73 @@
-@import "compass/css3";
+$time: 6s;
+$rand: 5000;
+/*
+  feel free to change $rand
+  it changes the amplitude 
+*/
 
-* {
+@function rand($val){
+  @if (random($val)) > $val/2{
+    @return percentage(random($val)/100);
+  }@else{
+    @return - percentage(random($val)/100);
+  }  
+}
+
+@mixin animation($name){
+    @-webkit-keyframes #{$name}{
+        @content;
+    }
+    @-moz-keyframes #{$name}{
+        @content;
+    }
+    @-o-keyframes #{$name}{
+        @content;
+    }
+    @keyframes #{$name}{
+        @content;
+    }
+}
+
+@include animation(batman){
+  0%{
+     transform: translate(rand($rand), rand($rand));
+     opacity: 0;
+  }
+  30%, 60%{
+     transform: translate(0);
+     opacity: 1;
+  }
+  100%{
+     transform: translate(rand($rand), rand($rand));
+     opacity: 0;
+  }
+}
+
+body{
   margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-html, body {
-  min-height: 100%;
-}
-
-body {
-  background: radial-gradient(#666,#eee);
-}
-
-.loader {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  margin: auto;
-  div {
-    border: 2px dashed aqua;
-    box-shadow: 0px 0px 1000px aquamarine, inset 0px 0px 20px aquamarine;
-    height: 48px;
-    width: 48px;
-    border-radius: 100%;
+  overflow: hidden;
+  
+  svg{
     position: absolute;
-    top: 0px;
-    left: 0px;
-    &:nth-child(1) {
-      animation: loading 4s infinite linear;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    background: -webkit-radial-gradient(#01579B, #000);
+    background: -o-radial-gradient(#01579B, #000);
+    background: -moz-radial-gradient(#01579B, #000);
+    background: radial-gradient(#01579B, #000);
+    
+    g{
+      -webkit-filter: url(#edge-cleaner);
+      filter: url(#edge-cleaner);
     }
-    &:nth-child(2) {
-      animation: loading 3.5s infinite linear;
+    
+    polygon{     
+      opacity: 0;
+      -webkit-animation: batman $time infinite;
+      -moz-animation: batman $time infinite;
+      -o-animation: batman $time infinite;
+      animation: batman $time infinite; 
     }
-    &:nth-child(3) {
-      animation: loading 3s infinite linear;
-    }
-    &:nth-child(4) {
-      animation: loading 2.5s infinite linear;
-    }
-    &:nth-child(5) {
-      animation: loading 2s infinite linear;
-    }
-  }
-}
-
-@keyframes loading {
-  from {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  }
-  to {
-    transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
   }
 }
