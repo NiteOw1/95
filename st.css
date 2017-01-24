@@ -11,10 +11,10 @@ body {
 }
 .svg-container svg { 
   min-width: 100%;
-  border-radius: 50%; 
-  box-shadow: 0 50px 30px 10px rgba(0,0,0,0.6); 
+  border-radius: 75%; 
+  box-shadow: 0 60px 40px 20px rgba(0,0,0,0.5); 
 }
 circle { 
-  stroke-width: 58; 
+  stroke-width: 60; 
   stroke: red;
 }
