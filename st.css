@@ -2,7 +2,7 @@ body {
   margin: 0;
   background: #222;
 }
-.svg-container {
+.svg-container svg {
   display: flex;
   width: 50%;
   margin: 0 auto;
